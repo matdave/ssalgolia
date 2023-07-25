@@ -1,0 +1,18 @@
+{
+    "name": "matdave/ssalgolia",
+    "autoload": {
+        "psr-4": {
+            "SSAlgolia\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "matdave",
+            "email": "mat@matdave.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4.0",
+        "algolia/algoliasearch-client-php": "^3.3"
+    }
+}

@@ -1,0 +1,40 @@
+{
+  "name": "SSAlgolia",
+  "lowCaseName": "ssalgolia",
+  "description": "Algolia integration for Simple Search",
+  "author": "matdave",
+  "version": "0.0.1-pl",
+  "package": {
+    "elements": {
+      "plugins": [
+        {
+          "name": "SSAlgoliaIndexer",
+          "file": "SSAlgoliaIndexer.php",
+          "events": [
+            "OnDocFormSave",
+            "OnDocPublished",
+            "OnDocUnpublished",
+            "OnResourceDelete",
+            "OnResourceDuplicate",
+            "OnResourceUndelete"
+          ]
+        }
+      ]
+    },
+    "systemSettings": [
+      {
+        "key": "id",
+        "area": "Algolia"
+      },
+      {
+        "key": "key",
+        "area": "Algolia",
+        "type": "password"
+      },
+      {
+        "key": "index",
+        "area": "Algolia"
+      }
+    ]
+  }
+}
