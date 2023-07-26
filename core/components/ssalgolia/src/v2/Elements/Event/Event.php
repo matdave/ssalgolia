@@ -26,7 +26,7 @@ abstract class Event
     public function __construct($ssa, array $scriptProperties)
     {
         $this->ssa =& $ssa;
-        $this->modx =& $this->ls->modx;
+        $this->modx =& $this->ssa->modx;
         $this->sp = $scriptProperties;
         $this->algolia = new Algolia($this->modx);
     }

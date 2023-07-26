@@ -10,11 +10,12 @@ class OnDocFormSave extends Event
     public function run()
     {
         $id = $this->getOption('id');
+        $mode = $this->getOption('mode', 'upd');
         $object = $this->getObject($id);
         if ($object) {
-            if ($object['published'] && !$object['deleted']) {
+            if ($object['published'] && $object['searchable'] && !$object['deleted']) {
                 $this->algolia->saveObject($object);
-            } else {
+            } elseif ($mode == 'upd') {
                 $this->algolia->removeObject($id);
             }
         }

@@ -12,7 +12,7 @@ class OnDocPublished extends Event
         $id = $this->getOption('id');
         $object = $this->getObject($id);
         if ($object) {
-            if (!$object['deleted']) {
+            if (!$object['deleted'] && $object['searchable']) {
                 $this->algolia->saveObject($object);
             } else {
                 $this->algolia->removeObject($id);

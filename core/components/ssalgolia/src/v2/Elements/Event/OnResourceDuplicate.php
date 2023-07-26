@@ -15,10 +15,8 @@ class OnResourceDuplicate extends Event
         $id = $newResource->get('id');
         $object = $this->getObject($id);
         if ($object) {
-            if ($object['published'] && !$object['deleted']) {
+            if ($object['published'] && $object['searchable'] && !$object['deleted']) {
                 $this->algolia->saveObject($object);
-            } else {
-                $this->algolia->removeObject($id);
             }
         }
         if ($duplicateChildren && $publishedMode !== 'unpublish') {
@@ -26,7 +24,7 @@ class OnResourceDuplicate extends Event
             foreach ($children as $child) {
                 $object = $this->getObject($child);
                 if ($object) {
-                    if ($object['published'] && !$object['deleted']) {
+                    if ($object['published'] && $object['searchable'] && !$object['deleted']) {
                         $this->algolia->saveObject($object);
                     }
                 }

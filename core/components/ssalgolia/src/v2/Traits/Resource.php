@@ -4,7 +4,11 @@ namespace SSAlgolia\v2\Traits;
 
 trait Resource
 {
-    private $modx;
+    /**
+     * A reference to the modX object.
+     * @var \modX $modx
+     */
+    public $modx = null;
     public function getObject(int $id): array
     {
         $object = $this->modx->getObject('modResource', $id);

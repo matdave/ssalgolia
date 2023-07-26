@@ -12,7 +12,7 @@ class OnResourceUndelete extends Event
         $id = $this->getOption('id');
         $object = $this->getObject($id);
         if ($object) {
-            if ($object['published']) {
+            if ($object['published'] && $object['searchable']) {
                 $this->algolia->saveObject($object);
             }
         }
