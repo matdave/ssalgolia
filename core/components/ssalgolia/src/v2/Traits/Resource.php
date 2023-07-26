@@ -14,9 +14,12 @@ trait Resource
         $object = $this->modx->getObject('modResource', $id);
         if ($object) {
             $arr = $object->toArray();
-            $arr['url'] = $this->modx->makeUrl($id, $arr['context_key'], '', 'full');
-            $arr['template_variables'] = $this->getTemplateVariables($arr['template'], $object);
-            $arr['content'] = $this->getResourceContent($object);
+            // only run if it's going to be indexed
+            if ($arr['published'] && $arr['searchable'] && !$arr['deleted']) {
+                $arr['link'] = $this->modx->makeUrl($id, $arr['context_key'], '', 'full');
+                $arr['template_variables'] = $this->getTemplateVariables($arr['template'], $object);
+                $arr['content'] = $this->getResourceContent($object);
+            }
             return $arr;
         }
         return [];
@@ -28,7 +31,7 @@ trait Resource
         $TVTs = $this->modx->getCollection('modTemplateVarTemplate', ['templateid' => $template]);
         foreach ($TVTs as $TVT) {
             $tv = $TVT->getOne('TemplateVar');
-            $tvs[$tv->get('name')] = $object->getTVValue($tv->id);
+            $tvs[$tv->get('name')] =  preg_replace('/\s+/', ' ', strip_tags($object->getTVValue($tv->id)));
         }
         return $tvs;
     }
@@ -45,7 +48,7 @@ trait Resource
             $this->modx->parser->processElementTags('', $content, false, false, '[[', ']]', [], $maxIterations);
             $this->modx->parser->processElementTags('', $content, true, false, '[[', ']]', [], $maxIterations);
             $this->modx->parser->processElementTags('', $content, true, true, '[[', ']]', [], $maxIterations);
-            return $content;
+            return  preg_replace('/\s+/', ' ', strip_tags($content));
         }
         return '';
     }

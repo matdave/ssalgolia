@@ -3,7 +3,7 @@
   "lowCaseName": "ssalgolia",
   "description": "Algolia integration for Simple Search",
   "author": "matdave",
-  "version": "0.0.2-pl",
+  "version": "0.0.5-pl",
   "package": {
     "elements": {
       "plugins": [

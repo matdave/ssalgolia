@@ -36,8 +36,8 @@ class Algolia
         try {
             $this->index->saveObjects([$object], ['objectIDKey' => $key]);
             return true;
-        } catch (MissingObjectId $e) {
-            $this->modx->log(\xPDO::LOG_LEVEL_ERROR, 'Missing object ID for Algolia index');
+        } catch (\Exception $e) {
+            $this->modx->log(\xPDO::LOG_LEVEL_ERROR, 'Algolia Index Exception: ' . $e->getMessage());
             return false;
         }
     }
@@ -48,8 +48,8 @@ class Algolia
         try {
             $this->index->saveObjects($objects, ['objectIDKey' => $key]);
             return true;
-        } catch (MissingObjectId $e) {
-            $this->modx->log(\xPDO::LOG_LEVEL_ERROR, 'Missing object ID for Algolia index');
+        } catch (\Exception $e) {
+            $this->modx->log(\xPDO::LOG_LEVEL_ERROR, 'Algolia Index Exception: ' . $e->getMessage());
             return false;
         }
     }
@@ -74,13 +74,10 @@ class Algolia
         }
     }
 
-    public function searchString($string, $limit, $offset = 0)
+    public function searchString($string, $requestParams = [])
     {
         $this->initialize();
-        $results = $this->index->search($string, [
-            'hitsPerPage' => $limit,
-            'page' => (int) ($offset / $limit) + 1
-        ]);
+        $results = $this->index->search($string, $requestParams);
         return $results;
     }
 }
