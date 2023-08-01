@@ -15,7 +15,7 @@ class AlgoliaDriver extends Driver
 
     public function search($string, array $scriptProperties = array())
     {
-        $perPage = (int) $this->modx->getOption('perPage', $this->config, 10);
+        $perPage     = (int) $this->modx->getOption('perPage', $this->config, 10);
         $offset      = $this->modx->getOption('start', $this->config, 0);
         $offsetIndex = $this->modx->getOption('offsetIndex', $this->config, 'simplesearch_offset');
         $docFields   = $this->modx->getOption('docFields', $scriptProperties, 'id,pagetitle,longtitle,alias,description,introtext,content');
@@ -50,7 +50,7 @@ class AlgoliaDriver extends Driver
             'facetFilters' => $contextFilters,
             'restrictHighlightAndSnippetArrays' => true,
         ];
-        $this->cacheKey = $this->cacheKey . md5(serialize($requestParams));
+        $this->cacheKey = $this->cacheKey . md5(serialize($requestParams)) . md5($string);
         $cache = $this->modx->cacheManager->get($this->cacheKey);
         if ($cache) {
             return $cache;
