@@ -27,7 +27,6 @@ class SSAlgolia
 
         $this->modx->addPackage('ssalgolia', $this->getOption('modelPath'));
         $this->modx->lexicon->load('ssalgolia:default');
-        $this->autoload();
     }
 
     /**

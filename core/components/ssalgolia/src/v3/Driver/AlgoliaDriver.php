@@ -9,9 +9,10 @@ class AlgoliaDriver extends SimpleSearchDriverBasic
 {
     private Algolia $algolia;
     private string $cacheKey = 'ssalgolia';
-    public function initialize()
+    public function initialize(): bool
     {
         $this->algolia = new Algolia($this->modx);
+        return true;
     }
 
     public function search($string, array $scriptProperties = array())
@@ -67,17 +68,17 @@ class AlgoliaDriver extends SimpleSearchDriverBasic
         return $results;
     }
 
-    public function index(array $fields)
+    public function index(array $fields): bool
     {
         return true;
     }
 
-    public function removeIndex($id)
+    public function removeIndex($id): bool
     {
         return true;
     }
 
-    private function formatHits($hits = [])
+    private function formatHits($hits = []): array
     {
         $formatted = [];
         foreach ($hits as $hit) {
