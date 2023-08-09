@@ -40,11 +40,11 @@ You can play around with the other settings to see what works best for your site
 
 In the Simple Search system settings, change the following: 
 
-** MODX 2 **
+**MODX 2**
 simplesearch.driver_class = ssAlgoliaDriver
 simplesearch.driver_class_path = /www/core/components/ssalgolia/model/ssalgolia/driver/
 
-** MODX 3 **
+**MODX 3**
 simplesearch.driver_class = \SSAlgolia\v3\Driver\AlgoliaDriver
 
 
