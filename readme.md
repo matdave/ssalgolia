@@ -36,6 +36,18 @@ The algolia driver searches by the Context Key facet. So you will need to go int
 
 You can play around with the other settings to see what works best for your site. Feel free to reference the [Algolia documentation](https://www.algolia.com/doc/) for more information on these settings.
 
+### Point Simple Search to Algolia
+
+In the Simple Search system settings, change the following: 
+
+** MODX 2 **
+simplesearch.driver_class = ssAlgoliaDriver
+simplesearch.driver_class_path = /www/core/components/ssalgolia/model/ssalgolia/driver/
+
+** MODX 3 **
+simplesearch.driver_class = \SSAlgolia\v3\Driver\AlgoliaDriver
+
+
 ### Additional Setup
 
 Your site is ready to go at this point. However, I've included a couple of helpers to get you started. If you have an existing site and want to index all the data, you can run the following command in a console:
@@ -55,3 +67,4 @@ On a free Algolia account your are limited to 10kb record sizes. I've included a
 The system setting is called "ssalgolia.remove_common_words". If you set this to true, the driver will strip out common words from the index. This will reduce the size of the index, but it may also reduce the accuracy of the search results.
 
 You can adjust which common words are removed by editing the "ssalgolia.common_words" system setting. This is a comma separated list of words to remove from the index.
+
