@@ -22,7 +22,6 @@ if (!is_object($modx) || !($modx instanceof \MODX\Revolution\modX)) {
 }
 $modx->startTime= $tStart;
 $modx->initialize('web');
-require_once MODX_CORE_PATH . 'model/modx/modrequest.class.php';
 $modx->request = new \MODX\Revolution\modRequest($modx);
 
 /** @var SSAlgolia\v3\SSAlgolia $ssalgolia */
