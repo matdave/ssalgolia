@@ -15,5 +15,8 @@
         "php": ">=7.4.0",
         "algolia/algoliasearch-client-php": "^3.3",
         "psr/log": "1.0"
+    },
+    "require-dev": {
+        "modx/revolution": "^3"
     }
 }

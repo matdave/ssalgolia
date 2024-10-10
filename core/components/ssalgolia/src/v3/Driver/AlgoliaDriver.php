@@ -22,6 +22,7 @@ class AlgoliaDriver extends SimpleSearchDriverBasic
         $offsetIndex = $this->modx->getOption('offsetIndex', $this->config, 'simplesearch_offset');
         $docFields   = $this->modx->getOption('docFields', $scriptProperties, 'id,pagetitle,longtitle,alias,description,introtext,content');
         $context     = $this->modx->getOption('context', $scriptProperties, $this->modx->context->key);
+        $facet     = $this->modx->getOption('facets', $scriptProperties, null);
 
         if (isset($_REQUEST[$offsetIndex])) {
             $offset = (int) $_REQUEST[$offsetIndex];
@@ -32,9 +33,13 @@ class AlgoliaDriver extends SimpleSearchDriverBasic
         }
 
         $contexts = explode(',', $context);
-        $contextFilters = [];
+        $facetFilters = [];
         foreach ($contexts as $context) {
-            $contextFilters[] = 'context_key:' . $context;
+            $facetFilters[] = 'context_key:' . $context;
+        }
+        $facets = explode(',', $facet);
+        foreach ($facets as $facet) {
+            $facetFilters[] = $facet;
         }
 
         // make sure we always have the id field
@@ -49,7 +54,7 @@ class AlgoliaDriver extends SimpleSearchDriverBasic
             'page' => ($offset / $perPage),
             'attributesToRetrieve' => $docFields,
             'attributesToSnippet' => $docFields,
-            'facetFilters' => $contextFilters,
+            'facetFilters' => $facetFilters,
             'restrictHighlightAndSnippetArrays' => true,
         ];
         $this->cacheKey = $this->cacheKey . md5(serialize($requestParams)) . md5($string);

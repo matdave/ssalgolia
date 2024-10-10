@@ -32,6 +32,8 @@ Here you can set the order of the results. I recommend starting with this unalte
 
 The algolia driver searches by the Context Key facet. So you will need to go into the Facets tab and add a new facet attribute "context_key" and set it to "filter only".
 
+Additional facets can be added and used in the search results, by setting the `facetFilters` property in the SimpleSearch snippet call.
+
 #### Other Settings in the Algolia Dashboard
 
 You can play around with the other settings to see what works best for your site. Feel free to reference the [Algolia documentation](https://www.algolia.com/doc/) for more information on these settings.
