@@ -1,3 +1,7 @@
+1.0.2-pl
+-------------------
+- Adjusting index options to help with long pages on free accounts
+
 1.0.1-pl
 -------------------
 - Add facetFilters parameter to search to allow for more complex filtering

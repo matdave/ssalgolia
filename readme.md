@@ -73,3 +73,4 @@ The system setting is called "ssalgolia.remove_common_words". If you set this to
 
 You can adjust which common words are removed by editing the "ssalgolia.common_words" system setting. This is a comma separated list of words to remove from the index.
 
+Additionally, you can ensure content isn't too large by adjusting the "ssalgolia.max_content_length" system setting. This setting will strip any content larger than the value specified in characters. This is processed on a "per-field" basis, so may take some adjusting if you have a lot of rich text TVs.
