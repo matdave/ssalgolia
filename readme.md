@@ -6,7 +6,7 @@ This package contains a Simple Search Driver for the Algolia search service.
 
 Before installing, make sure you have signed up for an account at Algolia. (https://dashboard.algolia.com/users/sign_up)
 
-In Algolia, make note of your Application ID, index name, and [Admin API key](https://dashboard.algolia.com/account/api-keys/all).
+In Algolia, make note of your Application ID, index name, and [Write API key](https://dashboard.algolia.com/account/api-keys/all).
 
 ### Install the Extra
 
@@ -47,6 +47,8 @@ In the Simple Search system settings, change the following:
 simplesearch.driver_class = ssAlgoliaDriver
 
 simplesearch.driver_class_path = /www/core/components/ssalgolia/model/ssalgolia/driver/
+
+simplesearch.driver_db_specific = No
 
 **MODX 3**
 
