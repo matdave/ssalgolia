@@ -2,7 +2,7 @@ name: SSAlgolia
 lowCaseName: ssalgolia
 description: Algolia integration for Simple Search
 author: matdave
-version: 1.0.2-pl
+version: 1.1.0-pl
 plugins:
   - name: SSAlgoliaIndexer
     file: SSAlgoliaIndexer.php
@@ -13,6 +13,7 @@ plugins:
       - OnResourceDelete
       - OnResourceDuplicate
       - OnResourceUndelete
+      - OnHandleRequest
 systemSettings:
   - key: id
     area: Algolia
@@ -32,3 +33,7 @@ systemSettings:
     area: Indexing
     type: number
     value: 0
+  - key: insights_query_key
+    area: Insights
+  - key: insights_object_key
+    area: Insights

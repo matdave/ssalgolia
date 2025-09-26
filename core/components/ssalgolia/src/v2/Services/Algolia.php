@@ -3,6 +3,7 @@
 namespace SSAlgolia\v2\Services;
 
 use Algolia\AlgoliaSearch\Exceptions\MissingObjectId;
+use Algolia\AlgoliaSearch\InsightsClient;
 use Algolia\AlgoliaSearch\SearchClient;
 use Algolia\AlgoliaSearch\SearchIndex;
 
@@ -79,5 +80,53 @@ class Algolia
         $this->initialize();
         $results = $this->index->search($string, $requestParams);
         return $results;
+    }
+
+    public function trackClick($objectID, $queryID): void
+    {
+        $insights = InsightsClient::create(
+            $this->modx->getOption('ssalgolia.id'),
+            $this->modx->getOption('ssalgolia.key')
+        );
+
+        $event = [
+            "eventName"=>"ssalgoliaClick",
+            "eventType"=>"click",
+            "index"=> $this->modx->getOption('ssalgolia.index'),
+            "userToken"=> $this->getUserToken(),
+            "objectIDs" => [$objectID],
+            "queryID" => $queryID,
+        ];
+
+        $insights->sendEvent($event);
+    }
+
+    public function getUserToken(): string
+    {
+        $token = "0";
+        if ($this->modx->user) {
+            $token = (string) $this->modx->user->id;
+        }
+        if ($token === "0") {
+            $token = $this->getUserIp();
+        }
+        return $token;
+    }
+
+    private function getUserIp(): string
+    {
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        } else {
+            $ip = $_SERVER['REMOTE_ADDR'];
+        }
+        //Check for multiple IPs from WAF
+        $ip = explode(',', $ip);
+        if (is_array($ip)) {
+            return $ip[0];
+        }
+        return $ip;
     }
 }

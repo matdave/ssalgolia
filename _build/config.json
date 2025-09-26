@@ -3,7 +3,7 @@
   "lowCaseName": "ssalgolia",
   "description": "Algolia integration for Simple Search",
   "author": "matdave",
-  "version": "1.0.2-pl",
+  "version": "1.1.0-pl",
   "package": {
     "elements": {
       "plugins": [
@@ -16,7 +16,8 @@
             "OnDocUnpublished",
             "OnResourceDelete",
             "OnResourceDuplicate",
-            "OnResourceUndelete"
+            "OnResourceUndelete",
+            "OnHandleRequest"
           ]
         }
       ]
@@ -51,6 +52,14 @@
         "area": "Indexing",
         "type": "number",
         "value": 0
+      },
+      {
+        "key": "insights_query_key",
+        "area": "Insights"
+      },
+      {
+        "key": "insights_object_key",
+        "area": "Insights"
       }
     ]
   }

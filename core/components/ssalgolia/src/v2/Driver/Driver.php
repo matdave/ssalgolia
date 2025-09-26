@@ -64,7 +64,7 @@ abstract class Driver
      * @param array $fields
      * @return boolean
      */
-    abstract public function index(array $fields);
+    abstract public function index(array $fields): bool;
 
     /**
      * Remove a Resource from the index.
@@ -73,7 +73,7 @@ abstract class Driver
      * @param string|int $id
      * @return boolean
      */
-    abstract public function removeIndex($id);
+    abstract public function removeIndex($id): bool;
 
     /**
      * Scores and sorts the results based on 'fieldPotency'
