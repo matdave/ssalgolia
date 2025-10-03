@@ -83,7 +83,7 @@ class Algolia
         return $results;
     }
 
-    public function trackClick($objectID, $queryID): void
+    public function trackClick($objectID, $queryID, $position = 1): void
     {
         $insights = InsightsClient::create(
             $this->modx->getOption('ssalgolia.id'),
@@ -95,6 +95,7 @@ class Algolia
             "eventType"=>"click",
             "index"=> $this->modx->getOption('ssalgolia.index'),
             "userToken"=> $this->getUserToken(),
+            "positions" => [$position],
             "objectIDs" => [$objectID],
             "queryID" => $queryID,
         ];
@@ -126,8 +127,8 @@ class Algolia
         //Check for multiple IPs from WAF
         $ip = explode(',', $ip);
         if (is_array($ip)) {
-            return $ip[0];
+            return preg_replace('/[\W]/u', '-', $ip[0]);
         }
-        return $ip;
+        return preg_replace('/[\W]/u', '-', $ip);
     }
 }

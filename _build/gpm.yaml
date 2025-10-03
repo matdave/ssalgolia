@@ -37,3 +37,5 @@ systemSettings:
     area: Insights
   - key: insights_object_key
     area: Insights
+  - key: insights_position_key
+    area: Insights

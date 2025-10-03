@@ -7,7 +7,7 @@ class OnHandleRequest extends Event
     public function run()
     {
         $objectKey = $this->getOption('ssalgolia.insights_object_key');
-        $queryKey = $this->getOption('ssalgolia.insights.query_key');
+        $queryKey = $this->getOption('ssalgolia.insights_query_key');
         if (empty($objectKey) || empty($queryKey)) {
             return;
         }
@@ -15,6 +15,12 @@ class OnHandleRequest extends Event
             return;
         }
 
-        $this->algolia->trackClick($_REQUEST[$objectKey], $_REQUEST[$queryKey]);
+        $position = 1;
+        $positionKey = $this->getOption('ssalgolia.insights_position_key');
+        if (!empty($positionKey) && !empty($_REQUEST[$positionKey])) {
+            $position = (int) $_REQUEST[$positionKey];
+        }
+
+        $this->algolia->trackClick($_REQUEST[$objectKey], $_REQUEST[$queryKey], $position);
     }
 }

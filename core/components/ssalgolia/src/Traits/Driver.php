@@ -66,7 +66,7 @@ trait Driver
         if ($clickAnalytics) {
             $queryId = $search['queryID'] ?? null;
         }
-        $hits = $this->formatHits($search['hits'] ?? [], $queryId);
+        $hits = $this->formatHits($search['hits'] ?? [], $queryId, $offset);
         $results =  [
             'results' => $hits,
             'total' => $search['nbHits'] ?? 0,
@@ -85,10 +85,11 @@ trait Driver
         return true;
     }
 
-    private function formatHits($hits = [], $queryId = null): array
+    private function formatHits($hits = [], $queryId = null, $offset = 0): array
     {
         $formatted = [];
         foreach ($hits as $hit) {
+            $offset ++;
             $extract = '';
             if (isset($hit['_snippetResult'])) {
                 foreach ($hit['_snippetResult'] as $field => $snippet) {
@@ -100,6 +101,7 @@ trait Driver
             }
             $hit['queryId'] = $queryId;
             $hit['snippetResult'] = str_replace('… …', '…', trim($extract));
+            $hit['position'] = $offset;
             $formatted[] = $hit;
         }
         return $formatted;
